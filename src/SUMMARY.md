@@ -4,6 +4,9 @@
 
 - [NetworkManager](./devops/network-manager/nmcli.md)
 - [LVM](./devops/lvm/lvm.md)
+- [Disk](./devops/disk/disk.md)
+- [Log](./devops/log/log.md)
+- [Account](./devops/account/account.md)
 
 # System
 
