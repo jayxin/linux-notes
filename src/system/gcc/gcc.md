@@ -5,6 +5,7 @@
     * [静态编译案例](#静态编译案例)
     * [动态编译案例](#动态编译案例)
     * [静态库转动态库案例](#静态库转动态库案例)
+    * [查看体系结构元组](#查看体系结构元组)
 
 <!-- vim-markdown-toc -->
 
@@ -230,4 +231,20 @@ nm -D libhello.so
 # Use dynamic lib
 gcc -o hello -L. -lhello -Wl,-rpath,. main.c
 ldd hello
+```
+
+## 查看体系结构元组
+
+```sh
+# 查看形如 <arch>-<vendor>-<os>-<libc/abi> 的元组
+gcc -dumpmachine
+
+clang -dumpmachine
+
+rustc -vV | grep -i host
+
+arch=$(uname -m)
+os=$(uname -s | tr '[:upper:]' '[:lower:]')
+libc=$(ldd --version | head -n 1 | awk '{print $3}')
+echo "$arch-none-$os-$libc"
 ```
