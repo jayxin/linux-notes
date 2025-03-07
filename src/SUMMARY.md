@@ -11,6 +11,7 @@
 # System
 
 - [ELF](./system/elf/elf.md)
+- [Boot](./system/boot/boot.md)
 - [GCC](./system/gcc/gcc.md)
 - [Systemd](./system/systemd/systemd.md)
     - [Timers](./system/systemd/timers.md)
