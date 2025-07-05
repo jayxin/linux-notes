@@ -8,6 +8,7 @@
 - [Log](./devops/log/log.md)
 - [Account](./devops/account/account.md)
 - [SSH](./devops/ssh/ssh.md)
+- [Package Manager](./devops/package-manager/README.md)
 
 # System
 

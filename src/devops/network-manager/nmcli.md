@@ -91,3 +91,16 @@ nmcli con mod "Wired connection 1" ipv4.never-default yes
 # reload connection
 nmcli con reload
 ```
+
+`/etc/sysconfig/network-scripts/ifcfg-eth0`:
+
+```none
+DEVICE="eth0"
+ONBOOT="yes" # 开机启动
+NM_CONTROLLED="no" # 不接受 NetworkManager 控制
+TYPE="Ethernet"
+BOOTPROTO="static" # dhcp|static|none
+IPADDR="192.168.0.102"
+NETMASK="255.255.255.0"
+GATEWAY="192.168.0.101"
+```
