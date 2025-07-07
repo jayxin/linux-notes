@@ -15,3 +15,10 @@ rpm2cpio ../foo.rpm | cpio -idmv
 
 find .
 ```
+
+### 查看 yum 安装的包包含哪些文件
+
+```sh
+yum install yum-utils -y
+repoquery -l <package name>
+```

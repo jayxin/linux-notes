@@ -7,6 +7,9 @@
     * [查看内存占用](#查看内存占用)
     * [可视化查看系统启动时的性能](#可视化查看系统启动时的性能)
     * [正确修改系统时间](#正确修改系统时间)
+    * [查看操作系统位数](#查看操作系统位数)
+    * [查看 CPU 型号](#查看-cpu-型号)
+    * [查看系统架构](#查看系统架构)
 
 <!-- vim-markdown-toc -->
 
@@ -78,3 +81,55 @@ timedatectl set-time "2024-01-01 00:00:00"
 
 - Local time 时间正确
 - UTC 和 RTC 时间一致
+
+## 查看操作系统位数
+
+```sh
+getconf LONG_BIT
+```
+
+## 查看 CPU 型号
+
+```sh
+lscpu | grep -i 'model name'
+```
+
+## 查看系统架构
+
+```sh
+# print all info
+uname -a
+uname --all
+
+# kernel name
+uname -s
+uname --kernel-name
+
+# network node hostname
+uname -n
+uname --nodename
+
+# kernel release
+uname -r
+uname --kernel-release
+
+# kernel version
+uname -v
+uname --kernel-version
+
+# machine hardware name
+uname -m
+uname --machine
+
+# processor type (non-portable)
+uname -p
+uname --processor
+
+# hardware platform (non-portable)
+uname -i
+uname --hardware-platform
+
+# OS
+uname -o
+uname --operating-system
+```
