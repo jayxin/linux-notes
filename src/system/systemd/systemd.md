@@ -21,6 +21,14 @@
                 * [Unit Block](#unit-block)
                 * [Install Block](#install-block)
                 * [Service Block](#service-block)
+                * [Socket Block](#socket-block)
+                * [Timer Block](#timer-block)
+                * [Path Block](#path-block)
+                * [Mount Block](#mount-block)
+                * [Swap Block](#swap-block)
+                * [Slice Block](#slice-block)
+                * [Scope Block](#scope-block)
+        * [Override unit configuration](#override-unit-configuration)
     * [Target](#target)
     * [日志管理](#日志管理)
 
@@ -29,6 +37,32 @@
 # Systemd
 
 ![systemd architecture](./img/systemd.png)
+
+Systemd 的主要功能:
+
+- 系统引导流程 (init)
+- 守护进程管理 (daemon)
+- 日志收集 (journal)
+- 挂载和自动挂载 (mount/automount)
+- 定时任务 (timer)
+- 网络管理 (networkd)
+
+每个 systemd 管理的服务, 都有一个对应的 Unit 文件, 后缀
+`.service`, 位于 `/etc/systemd/system/` 或
+`/lib/systemd/system`.
+
+Help:
+
+```sh
+man -k systemd
+man systemd.unit
+man systemd.service
+man systemd.timer
+man systemd.exec
+
+# 所有可用字段的索引表
+man systemd.directives
+```
 
 ## 系统管理工具
 
@@ -294,8 +328,8 @@ systemctl cat ssh.service
 `[Unit]` 通常是配置文件的第一个区块, 用于定义 Unit 的元数据, 配置和其他 Unit
 的关系. 主要有如下字段:
 
-- `Description`
-- `Documentation`
+- `Description`: 对该 Unit 的描述, 用于 `systemctl status` 显示.
+- `Documentation`: 指定帮助文档链接.
 - `Requires`: 当前 Unit 依赖的其他 Unit, 若它们没有运行, 当前 Unit 会启动失败.
 - `Wants`: 和当前 Unit 配合的其他 Unit, 若它们没有运行, 当前 Unit 不会启动失败.
 - `BindsTo`: 和 `Requires` 类似, 它指定的 Unit 若退出, 会导致当前 Unit 停止运行.
@@ -322,7 +356,8 @@ systemctl cat ssh.service
 
 - `Type`: 定义启动时的进程行为.
     - `Type=simple`: 默认值, 执行 `ExecStart` 指定的命令, 启动主进程.
-    - `Type=forking`: 以 fork 方式从父进程创建子进程, 创建后父进程会立即退出.
+    - `Type=forking`: 以 fork 方式从父进程创建子进程, 创建后父进程会立即退出,
+        通常用于守护进程.
     - `Type=oneshot`: 一次性进程, Systemd 会等待当前服务退出, 再继续往下执行.
     - `Type=dbus`: 当前服务通过 D-Bus 启动.
     - `Type=notify`: 当前服务启动完毕, 会通知 Systemd, 再继续往下执行.
@@ -335,14 +370,86 @@ systemctl cat ssh.service
 - `ExecStopPost`: 停止当前服务之后执行的命令.
 - `RestartSec`: 自动重启当前服务间隔的秒数.
 - `Restart`: 定义何种情况 Systemd 会自动重启当前服务.
+    - `no`: 不重启
     - `always`: 总是重启
-    - `on-success`
-    - `on-failure`
-    - `on-abnormal`
+    - `on-success`: 成功退出时重启
+    - `on-failure`: 非 0 退出时重启
+    - `on-abnormal`: 信号或 core dump 时重启
     - `on-abort`
     - `on-watchdog`
 - `TimeoutSec`: 定义 Systemd 停止当前服务之前等待的秒数.
 - `Environment`: 指定环境变量.
+- `EnvironmentFile`: 指定环境变量的文件.
+- `RemainAfterExit`: 适用于 `oneshot` 类型, 服务执行后是否保持
+    激活状态.
+- `TimeoutStartSec`, `TimeoutStopSec`: 服务启停的超时时间.
+- `User`, `Group`: 服务运行的用户和组.
+- `WorkingDirectory`: 工作目录.
+- `StandardOutput`, `StandardError`: 设置日志输出,
+    如 `journal`, `syslog`, `null`, `tty` 等.
+- `LimitNOFILE`: 文件描述符限制.
+- `CapabilityBoundingSet`: 限制服务拥有的 Linux Capabilities.
+
+##### Socket Block
+
+`[Socket]` 用于套接字激活设置.
+
+常用字段:
+
+- `ListenStream`: tcp 或者 unix socket, 如 `8080`, `/run/ssh.sock`.
+- `SocketMode`: socket 权限, 如 `0660`.
+- `Accept`: 是否接受多个连接.
+
+##### Timer Block
+
+`[Timer]` 用于定时任务调度.
+
+##### Path Block
+
+`[Path]` 是文件或目录监控触发器.
+
+常用字段:
+
+- `PathExists`: 监控文件是否存在.
+- `PathChanged`: 监控内容变化.
+- `Unit`: 被触发的 unit 名称.
+
+##### Mount Block
+
+`[Mount]` 是文件系统挂载定义.
+
+类似 `/etc/fstab`.
+
+常用字段:
+
+- `What`: 挂载源设备.
+- `Where`: 挂载目标路径.
+- `Type`: 文件系统类型.
+- `Options`: 挂载选项.
+
+##### Swap Block
+
+`[Swap]` 用于 Swap 分区管理.
+
+##### Slice Block
+
+`[Slice]` 用于 CGroup 切片资源限制.
+
+##### Scope Block
+
+`[Scope]` 用于对临时进程组描述.
+
+### Override unit configuration
+
+覆盖某个 Unit 的配置, 比如环境变量.
+
+```sh
+systemctl edit docker.service
+```
+
+该命令会用文本编辑器打开 `/etc/systemd/system/docker.service.d/override.conf`.
+可用来覆盖 Unit 中的配置, 可用于配置代理等环境变量.
+需要设定 `$EDITOR` 或 `$SYSTEMD_EDITOR` 环境变量.
 
 ## Target
 
