@@ -6,6 +6,7 @@
     * [动态编译案例](#动态编译案例)
     * [静态库转动态库案例](#静态库转动态库案例)
     * [查看体系结构元组](#查看体系结构元组)
+    * [字节对齐](#字节对齐)
 
 <!-- vim-markdown-toc -->
 
@@ -247,4 +248,39 @@ arch=$(uname -m)
 os=$(uname -s | tr '[:upper:]' '[:lower:]')
 libc=$(ldd --version | head -n 1 | awk '{print $3}')
 echo "$arch-none-$os-$libc"
+```
+
+## 字节对齐
+
+```c
+#include <stdio.h>
+
+struct AlignTest0 {
+  char a; // 1
+  short b; // 2
+  int c; // 4
+} __attribute__((packed));
+
+struct AlignTest1 {
+  char a; // 1
+  short b; // 2
+  int c; // 4
+};
+
+struct AlignTest2 {
+  char a; // 1
+  short b; // 2
+  int c; // 4
+} __attribute__((aligned(16)));
+
+int main() {
+  printf("sizeof(AlignTest0) == %d\n", sizeof(struct AlignTest0));
+  printf("sizeof(AlignTest1) == %d\n", sizeof(struct AlignTest1));
+  printf("sizeof(AlignTest2) == %d\n", sizeof(struct AlignTest2));
+
+  //sizeof(AlignTest0) == 7
+  //sizeof(AlignTest1) == 8
+  //sizeof(AlignTest2) == 16
+  return 0;
+}
 ```
