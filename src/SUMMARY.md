@@ -9,6 +9,7 @@
 - [Account](./devops/account/account.md)
 - [SSH](./devops/ssh/ssh.md)
 - [Package Manager](./devops/package-manager/README.md)
+- [Input Method](./devops/input-method/README.md)
 
 # System
 
