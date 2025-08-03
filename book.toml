@@ -1,6 +1,6 @@
 [book]
 authors = []
-language = "en"
-multilingual = false
+language = "zh-Hans,en"
+multilingual = true
 src = "src"
 title = "Linux"

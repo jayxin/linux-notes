@@ -10,6 +10,8 @@
 - [SSH](./devops/ssh/ssh.md)
 - [Package Manager](./devops/package-manager/README.md)
 - [Input Method](./devops/input-method/README.md)
+- [Proxy](./devops/proxy/README.md)
+- [Cloudflare](./devops/cloudflare/README.md)
 
 # System
 
