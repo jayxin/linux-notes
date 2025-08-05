@@ -12,6 +12,7 @@
 - [Input Method](./devops/input-method/README.md)
 - [Proxy](./devops/proxy/README.md)
 - [Cloudflare](./devops/cloudflare/README.md)
+- [Wireless Network Connection](./devops/wireless-net-connection/README.md)
 
 # System
 
