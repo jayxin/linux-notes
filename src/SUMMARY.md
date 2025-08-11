@@ -14,6 +14,8 @@
 - [Cloudflare](./devops/cloudflare/README.md)
 - [Wireless Network Connection](./devops/wireless-net-connection/README.md)
 - [LVS](./devops/lvs/README.md)
+- [Kubernetes](./devops/k8s/README.md)
+    - [Install](./devops/k8s/install.md)
 
 # System
 
