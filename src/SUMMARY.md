@@ -16,6 +16,7 @@
 - [LVS](./devops/lvs/README.md)
 - [Kubernetes](./devops/k8s/README.md)
     - [Install](./devops/k8s/install.md)
+    - [kubeadm](./devops/k8s/kubeadm.md)
 
 # System
 
