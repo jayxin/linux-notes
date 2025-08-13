@@ -451,6 +451,32 @@ systemctl edit docker.service
 可用来覆盖 Unit 中的配置, 可用于配置代理等环境变量.
 需要设定 `$EDITOR` 或 `$SYSTEMD_EDITOR` 环境变量.
 
+<details>
+<summary>
+    <code>/etc/systemd/system/docker.service.d/override.conf</code>
+</summary>
+
+```conf
+[Service]
+Environment="ALL_PROXY=http://192.168.1.1:7890"
+Environment="HTTP_PROXY=http://192.168.1.1:7890"
+Environment="HTTPS_PROXY=http://192.168.1.1:7890"
+Environment="NO_PROXY=localhost,127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.svc,.cluster.local"
+```
+
+</details>
+
+<details>
+<summary>重启</summary>
+
+```sh
+systemctl daemon-reload
+systemctl restart docker
+systemctl status docker
+```
+
+</details>
+
 ## Target
 
 启动计算机时, 需启动大量 Unit. 若每次启动, 都要写明本次启动需要哪些
