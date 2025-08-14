@@ -26,6 +26,8 @@
 - [Systemd](./system/systemd/systemd.md)
     - [Timers](./system/systemd/timers.md)
 - [Firewall](./system/firewall/firewall.md)
+- [LaTeX](./system/latex/README.md)
+    - [TeXLive](./system/latex/texlive.md)
 
 # Programming
 
