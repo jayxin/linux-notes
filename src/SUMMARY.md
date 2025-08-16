@@ -18,6 +18,8 @@
     - [Install](./devops/k8s/install.md)
     - [Install-High Availability](./devops/k8s/install-ha.md)
     - [kubeadm](./devops/k8s/kubeadm.md)
+    - [Create new user](./devops/k8s/new-user.md)
+    - [Prometheus and Grafana](./devops/k8s/prometheus-grafana.md)
 
 # System
 
