@@ -20,6 +20,7 @@
     - [kubeadm](./devops/k8s/kubeadm.md)
     - [Create new user](./devops/k8s/new-user.md)
     - [Prometheus and Grafana](./devops/k8s/prometheus-grafana.md)
+    - [Trouble Shooting](./devops/k8s/trouble-shooting.md)
 
 # System
 
