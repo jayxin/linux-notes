@@ -21,6 +21,7 @@
     - [Create new user](./devops/k8s/new-user.md)
     - [Prometheus and Grafana](./devops/k8s/prometheus-grafana.md)
     - [Trouble Shooting](./devops/k8s/trouble-shooting.md)
+- [MySQL](./devops/mysql/README.md)
 
 # System
 
@@ -32,6 +33,7 @@
 - [Firewall](./system/firewall/firewall.md)
 - [LaTeX](./system/latex/README.md)
     - [TeXLive](./system/latex/texlive.md)
+- [GPG](./system/gpg/README.md)
 
 # Programming
 
