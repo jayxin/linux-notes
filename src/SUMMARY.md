@@ -22,6 +22,8 @@
     - [Prometheus and Grafana](./devops/k8s/prometheus-grafana.md)
     - [Trouble Shooting](./devops/k8s/trouble-shooting.md)
 - [MySQL](./devops/mysql/README.md)
+- [GitLab](./devops/gitlab/README.md)
+    - [Install](./devops/gitlab/install.md)
 
 # System
 
