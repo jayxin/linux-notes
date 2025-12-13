@@ -8,6 +8,9 @@
     * [Fix pod stuck in the terminating state](#fix-pod-stuck-in-the-terminating-state)
         * [Problem](#problem-1)
         * [Solution](#solution-1)
+    * [Get the container engine been used by a k8s cluster](#get-the-container-engine-been-used-by-a-k8s-cluster)
+        * [Solution 1](#solution-1-1)
+        * [Solution 2](#solution-2)
 
 <!-- vim-markdown-toc -->
 
@@ -118,3 +121,24 @@ kubectl delete pod ${PODNAME} \
 ```
 
 </details>
+
+## Get the container engine been used by a k8s cluster
+
+To determine which container engine the k8s cluster is using (e.g.,
+containerd, CRI-O, Docker/Dockershim), we typically look at the kubelet
+configuration on the cluster nodes.
+
+### Solution 1
+
+```bash
+kubectl get nodes -o wide
+# cri-o:// docker:// containerd://
+```
+
+### Solution 2
+
+```bash
+ssh user@<node-ip-addr>
+ps aux | grep kubelet | grep -v grep
+# check --container-runtime-endpoint
+```
