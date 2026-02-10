@@ -36,6 +36,7 @@
 - [LaTeX](./system/latex/README.md)
     - [TeXLive](./system/latex/texlive.md)
 - [GPG](./system/gpg/README.md)
+- [Font](./system/font/README.md)
 
 # Programming
 
