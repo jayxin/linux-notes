@@ -35,10 +35,13 @@
 - [Firewall](./system/firewall/firewall.md)
 - [LaTeX](./system/latex/README.md)
     - [TeXLive](./system/latex/texlive.md)
+    - [TeXLive 安装与 LaTeX 编译优化](./system/latex/texlive-installation-and-optimization.md)
 - [GPG](./system/gpg/README.md)
 - [Font](./system/font/README.md)
 
 # Programming
 
 - [NodeJS](./programming/nodejs/README.md)
+- [Python](./programming/python/README.md)
+    - [Virtual Environment](./programming/python/virtual-env.md)
 - [Git](./programming/git/README.md)
